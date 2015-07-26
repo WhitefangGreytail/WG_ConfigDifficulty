@@ -3,5 +3,5 @@
 *.suo
 *.sln
 *Help file.txt
-WG_BalancePopMod/bin/*
-WG_BalancePopMod/obj/*
+WG_ConfigDifficulty/bin/*
+WG_ConfigDifficulty/obj/*
