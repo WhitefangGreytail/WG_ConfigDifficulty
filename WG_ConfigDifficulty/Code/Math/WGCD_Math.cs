@@ -12,15 +12,21 @@ namespace WG_ConfigDifficulty
         /// 
         /// </summary>
         /// <param name="a"></param>
-        /// <param name="c"></param>
-        void setParams(double a, double c);
+        /// <param name="b"></param>
+        void setParams(double a, double b);
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        void getParams(out double a, out double b);
 
 
         /// <summary>
         ///
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="c"></param>
         /// <param name="input"></param>
         /// <returns></returns>
         double calculateReturnValue(double input);

@@ -97,7 +97,7 @@ namespace WG_ConfigDifficulty
             WG_MathParam defaultParam = new WG_MathParam(1.0, 0.0);
             if (!mathToDefault[DataStore.CONSTRUCT])
             {
-                DataStore.calcObjects[DataStore.CONSTRUCT] = new Logarithmic(defaultParam);
+                DataStore.calcObjects[DataStore.CONSTRUCT] = new Linear(defaultParam);
             }
 
             if (!mathToDefault[DataStore.MAINT])
@@ -112,22 +112,22 @@ namespace WG_ConfigDifficulty
 
             if (!mathToDefault[DataStore.REFUND])
             {
-                DataStore.calcObjects[DataStore.REFUND] = new Percentage(new WG_MathParam(750.0, 0.0));
+                DataStore.calcObjects[DataStore.REFUND] = new Percentage(new WG_MathParam(75.0, 0.0));
             }
 
             if (!mathToDefault[DataStore.DEMAND_RES])
             {
-                DataStore.calcObjects[DataStore.DEMAND_RES] = new Sigmoid(defaultParam);
+                DataStore.calcObjects[DataStore.DEMAND_RES] = new Linear(defaultParam);
             }
 
             if (!mathToDefault[DataStore.DEMAND_COM])
             {
-                DataStore.calcObjects[DataStore.DEMAND_COM] = new Sigmoid(defaultParam);
+                DataStore.calcObjects[DataStore.DEMAND_COM] = new Linear(defaultParam);
             }
 
             if (!mathToDefault[DataStore.DEMAND_IND])
             {
-                DataStore.calcObjects[DataStore.DEMAND_IND] = new Sigmoid(defaultParam);
+                DataStore.calcObjects[DataStore.DEMAND_IND] = new Linear(defaultParam);
             }
         }
     }

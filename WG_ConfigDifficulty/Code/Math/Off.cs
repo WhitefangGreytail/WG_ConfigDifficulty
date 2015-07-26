@@ -9,8 +9,14 @@ namespace WG_ConfigDifficulty
         {
         }
 
-        public void setParams(double a, double c)
+        public void setParams(double a, double b)
         {
+        }
+
+        public void getParams(out double a, out double b)
+        {
+            a = 0;
+            b = 0;
         }
 
         public double calculateReturnValue(double input)
