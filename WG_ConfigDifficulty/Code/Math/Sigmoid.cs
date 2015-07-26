@@ -8,23 +8,30 @@ namespace WG_ConfigDifficulty
     class Sigmoid : WGCD_Math
     {
         double a;
-        double c;
+        double b;
         Dictionary<int, int> sigMap = new Dictionary<int,int>(100);
 
 
         public Sigmoid(WG_MathParam param)
         {
             this.a = param.multiplier;
-            this.c = param.offset;
+            this.b = param.offset;
             calculateArray();
         }
 
 
-        public void setParams(double a, double c)
+        public void setParams(double a, double b)
         {
             this.a = a;
-            this.c = c;
+            this.b = b;
             calculateArray();
+        }
+
+
+        public void getParams(out double a, out double b)
+        {
+            a = this.a;
+            b = this.b;
         }
 
 
@@ -42,7 +49,7 @@ namespace WG_ConfigDifficulty
         public double calculateReturnValue(double input)
         {
             // Returns 0 to 100
-            return (100 / (1 + Math.Exp(a * -0.1 * (input - 50)))) + c;
+            return (100 / (1 + Math.Exp(a * -0.1 * (input - 50)))) + b;
         }
 
 
@@ -61,7 +68,7 @@ namespace WG_ConfigDifficulty
 
         private int addToMap(int input)
         {
-            int output = (int) ((100 / (1 + Math.Exp(a * -0.1 * (input - 50)))) + c);
+            int output = (int) ((100 / (1 + Math.Exp(a * -0.1 * (input - 50)))) + b);
             sigMap.Add(input, output);
             return output;
         }

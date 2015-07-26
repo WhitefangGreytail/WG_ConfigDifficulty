@@ -13,9 +13,15 @@ namespace WG_ConfigDifficulty
             this.a = param.multiplier / 100.0;
         }
 
-        public void setParams(double a, double c)
+        public void setParams(double a, double b)
         {
             this.a = a / 100.0;
+        }
+
+        public void getParams(out double a, out double b)
+        {
+            a = this.a * 100.0;
+            b = 0;
         }
 
         public double calculateReturnValue(double input)

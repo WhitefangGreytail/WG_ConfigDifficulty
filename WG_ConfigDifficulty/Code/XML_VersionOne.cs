@@ -14,7 +14,15 @@ namespace WG_ConfigDifficulty
         private const string demandName = "demand";
         private const string levelUpName = "levelUp";
 
-        // The 
+        public const string CONSTRUCT = "construct";
+        public const string MAINT = "maint";
+        public const string RELOC = "relocation";
+        public const string REFUND = "refund";
+        public const string DEMAND_RES = "demand_res";
+        public const string DEMAND_COM = "demand_com";
+        public const string DEMAND_IND = "demand_ind";
+
+        // The array stating which math has been loaded in
         private bool[] mathToDefault = { false, false, false, false, false, false, false };
 
         /// <summary>
@@ -57,7 +65,6 @@ namespace WG_ConfigDifficulty
             // Probably do nothing for a while
         }
 
-
         public void writeXML(string fileLocation)
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -73,15 +80,15 @@ namespace WG_ConfigDifficulty
             XmlNode levelUpNode = xmlDoc.CreateElement(levelUpName);
 
             // Economynode
-            makeEconomyNode(xmlDoc, econNode, "construct", DataStore.calcObjects[DataStore.CONSTRUCT]);
-            makeEconomyNode(xmlDoc, econNode, null, DataStore.calcObjects[DataStore.MAINT]);
-            makeEconomyNode(xmlDoc, econNode, null, DataStore.calcObjects[DataStore.RELOC]);
-            makeEconomyNode(xmlDoc, econNode, null, DataStore.calcObjects[DataStore.REFUND]);
+            makeEconomyNode(xmlDoc, econNode, CONSTRUCT, DataStore.calcObjects[DataStore.CONSTRUCT]);
+            makeEconomyNode(xmlDoc, econNode, MAINT, DataStore.calcObjects[DataStore.MAINT]);
+            makeEconomyNode(xmlDoc, econNode, RELOC, DataStore.calcObjects[DataStore.RELOC]);
+            makeEconomyNode(xmlDoc, econNode, REFUND, DataStore.calcObjects[DataStore.REFUND]);
 
             // DemandNode
-            makeDemandNode(xmlDoc, demandNode, null, DataStore.calcObjects[DataStore.DEMAND_RES]);
-            makeDemandNode(xmlDoc, demandNode, null, DataStore.calcObjects[DataStore.DEMAND_COM]);
-            makeDemandNode(xmlDoc, demandNode, null, DataStore.calcObjects[DataStore.DEMAND_IND]);
+            makeDemandNode(xmlDoc, demandNode, DEMAND_RES, DataStore.calcObjects[DataStore.DEMAND_RES]);
+            makeDemandNode(xmlDoc, demandNode, DEMAND_COM, DataStore.calcObjects[DataStore.DEMAND_COM]);
+            makeDemandNode(xmlDoc, demandNode, DEMAND_IND, DataStore.calcObjects[DataStore.DEMAND_IND]);
 
             // LevelNode
             // makeLevelUpNode(levelUpNode, null, ???)
@@ -115,26 +122,46 @@ namespace WG_ConfigDifficulty
             }
         }
 
-        public void makeEconomyNode(XmlDocument xmlDoc, XmlNode rootNode, String name, WGCD_Math a)
+        public void makeEconomyNode(XmlDocument xmlDoc, XmlNode rootNode, String name, WGCD_Math math)
         {
             XmlNode node = xmlDoc.CreateElement(name);
+            double a, b = 0.0;
+            math.getParams(out a, out b);
 
             XmlAttribute attribute = xmlDoc.CreateAttribute("type");
-            attribute.Value = Convert.ToString(getMathType(a));
+            attribute.Value = Convert.ToString(getMathType(math));
             node.Attributes.Append(attribute);
 
-            // TODO - repeat for a and c
+            attribute = xmlDoc.CreateAttribute("a");
+            attribute.Value = Convert.ToString(a);
+            node.Attributes.Append(attribute);
+
+            attribute = xmlDoc.CreateAttribute("b");
+            attribute.Value = Convert.ToString(b);
+            node.Attributes.Append(attribute);
+
+            rootNode.AppendChild(node);
         }
 
-        public void makeDemandNode(XmlDocument xmlDoc, XmlNode rootNode, String name, WGCD_Math a)
+        public void makeDemandNode(XmlDocument xmlDoc, XmlNode rootNode, String name, WGCD_Math math)
         {
             XmlNode node = xmlDoc.CreateElement(name);
+            double a, b = 0.0;
+            math.getParams(out a, out b);
 
             XmlAttribute attribute = xmlDoc.CreateAttribute("type");
-            attribute.Value = Convert.ToString(getMathType(a));
+            attribute.Value = Convert.ToString(getMathType(math));
             node.Attributes.Append(attribute);
 
-            // TODO - repeat for a and c
+            attribute = xmlDoc.CreateAttribute("a");
+            attribute.Value = Convert.ToString(a);
+            node.Attributes.Append(attribute);
+
+            attribute = xmlDoc.CreateAttribute("b");
+            attribute.Value = Convert.ToString(b);
+            node.Attributes.Append(attribute);
+
+            rootNode.AppendChild(node);
         }
 
         public void makeLevelUpNode(XmlDocument xmlDoc, XmlNode rootNode, String name)

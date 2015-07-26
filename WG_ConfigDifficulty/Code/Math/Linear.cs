@@ -7,28 +7,34 @@ namespace WG_ConfigDifficulty
     class Linear : WGCD_Math
     {
         double a;
-        double c;
+        double b;
 
         public Linear(WG_MathParam param)
         {
             this.a = param.multiplier;
-            this.c = param.offset;
+            this.b = param.offset;
         }
 
-        public void setParams(double a, double c)
+        public void setParams(double a, double b)
         {
             this.a = a;
-            this.c = c;
+            this.b = b;
+        }
+
+        public void getParams(out double a, out double b)
+        {
+            a = this.a;
+            b = this.b;
         }
 
         public double calculateReturnValue(double input)
         {
-            return (a * input) + c;
+            return (a * input) + b;
         }
 
         public int calculateReturnValue(int input)
         {
-            return (int) ((a * input) + c);
+            return (int) ((a * input) + b);
         }
     }
 }
