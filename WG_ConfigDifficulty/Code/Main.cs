@@ -97,37 +97,45 @@ namespace WG_ConfigDifficulty
             WG_MathParam defaultParam = new WG_MathParam(1.0, 0.0);
             if (!mathToDefault[DataStore.CONSTRUCT])
             {
-                DataStore.calcObjects[DataStore.CONSTRUCT] = new Linear(defaultParam);
+                DataStore.calcObjects[DataStore.CONSTRUCT] = new Linear();
+                DataStore.calcObjects[DataStore.CONSTRUCT].setDefaults();
             }
 
             if (!mathToDefault[DataStore.MAINT])
             {
-                DataStore.calcObjects[DataStore.MAINT] = new Linear(defaultParam);
+                DataStore.calcObjects[DataStore.MAINT] = new Linear();
+                DataStore.calcObjects[DataStore.MAINT].setDefaults();
             }
 
             if (!mathToDefault[DataStore.RELOC])
             {
-                DataStore.calcObjects[DataStore.RELOC] = new Percentage(new WG_MathParam(20.0, 0.0));
+                DataStore.calcObjects[DataStore.RELOC] = new Percentage();
+                //new WG_MathParam(20.0, 0.0)
             }
+            // FIXME TODO
 
             if (!mathToDefault[DataStore.REFUND])
             {
-                DataStore.calcObjects[DataStore.REFUND] = new Percentage(new WG_MathParam(75.0, 0.0));
+                DataStore.calcObjects[DataStore.REFUND] = new Percentage();
+                //new WG_MathParam(75.0, 0.0)
             }
 
             if (!mathToDefault[DataStore.DEMAND_RES])
             {
-                DataStore.calcObjects[DataStore.DEMAND_RES] = new Linear(defaultParam);
+                DataStore.calcObjects[DataStore.DEMAND_RES] = new Linear();
+                DataStore.calcObjects[DataStore.DEMAND_RES].setDefaults();
             }
 
             if (!mathToDefault[DataStore.DEMAND_COM])
             {
-                DataStore.calcObjects[DataStore.DEMAND_COM] = new Linear(defaultParam);
+                DataStore.calcObjects[DataStore.DEMAND_COM] = new Linear();
+                DataStore.calcObjects[DataStore.DEMAND_COM].setDefaults();
             }
 
             if (!mathToDefault[DataStore.DEMAND_IND])
             {
-                DataStore.calcObjects[DataStore.DEMAND_IND] = new Linear(defaultParam);
+                DataStore.calcObjects[DataStore.DEMAND_IND] = new Linear();
+                DataStore.calcObjects[DataStore.DEMAND_IND].setDefaults();
             }
         }
     }

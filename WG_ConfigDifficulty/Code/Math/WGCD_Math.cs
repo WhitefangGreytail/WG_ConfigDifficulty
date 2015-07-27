@@ -1,35 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Xml;
 
 
 namespace WG_ConfigDifficulty
 {
-    interface WGCD_Math
+    abstract class WGCD_Math
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        void setParams(double a, double b);
+        public abstract void setDefaults();
 
+        public abstract void readXML(XmlNode node);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        void getParams(out double a, out double b);
+        public abstract XmlNode generateXML(XmlDocument xmlDoc, string elementName);
 
+        public abstract double calculateReturnValue(double input);
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        double calculateReturnValue(double input);
-        int calculateReturnValue(int input);
+        public abstract int calculateReturnValue(int input);
     }
 }
