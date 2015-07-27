@@ -1,35 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml;
 
 
 namespace WG_ConfigDifficulty
 {
     class Percentage : WGCD_Math
     {
+        public static string NAME = "percentage";
         double a;
 
-        public Percentage(WG_MathParam param)
+        public Percentage()
         {
-            this.a = param.multiplier / 100.0;
         }
 
-        public void setParams(double a, double b)
+        public override void setDefaults()
         {
-            this.a = a / 100.0;
+            a = 100.0;
         }
 
-        public void getParams(out double a, out double b)
+        public override void readXML(XmlNode node)
         {
-            a = this.a * 100.0;
-            b = 0;
+            a = (XMLHelper.takeParam(node, "a", 100.0) / 100.0);
         }
 
-        public double calculateReturnValue(double input)
+        public override XmlNode generateXML(XmlDocument xmlDoc, string elementName)
+        {
+            XmlNode node = xmlDoc.CreateElement(elementName);
+
+            XmlAttribute attribute = xmlDoc.CreateAttribute("type");
+            attribute.Value = Convert.ToString(NAME);
+            node.Attributes.Append(attribute);
+
+            // TODO - Format to 5 decimal places
+            attribute = xmlDoc.CreateAttribute("a");
+            attribute.Value = Convert.ToString(a * 100.0);
+            node.Attributes.Append(attribute);
+
+            return node;
+        }
+
+        public override double calculateReturnValue(double input)
         {
             return (a * input);
         }
 
-        public int calculateReturnValue(int input)
+        public override int calculateReturnValue(int input)
         {
             return (int) (a * input);
         }
