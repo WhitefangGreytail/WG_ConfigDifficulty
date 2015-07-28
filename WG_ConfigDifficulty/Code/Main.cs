@@ -52,7 +52,7 @@ namespace WG_ConfigDifficulty
         private void readFromXML()
         {
             bool fileAvailable = File.Exists(currentFileLocation);
-            bool[] mathToDefault = null;
+            bool[] defaultMath = null;
 
             if (fileAvailable)
             {
@@ -63,7 +63,7 @@ namespace WG_ConfigDifficulty
                     doc.Load(currentFileLocation);
 
                     XML_VersionOne reader = new XML_VersionOne();
-                    mathToDefault = reader.readXML(doc);
+                    defaultMath = reader.readXML(doc);
                 }
                 catch (Exception e)
                 {
@@ -76,66 +76,57 @@ namespace WG_ConfigDifficulty
                 Debugging.panelMessage("Configuration file not found. Will output new file to : " + currentFileLocation);
             }
 
-            doMathDefaults(mathToDefault);
+            doMathDefaults(defaultMath);
         }
 
         /// <summary>
         /// Sets the defaults to what the game currently have. We'll have other XML defaults
         /// </summary>
-        /// <param name="mathToDefault"></param>
-        private void doMathDefaults(bool[] mathToDefault)
+        /// <param name="defaultMath"></param>
+        private void doMathDefaults(bool[] defaultMath)
         {
-            if (mathToDefault == null)
+            if (defaultMath == null)
             {
-                mathToDefault = new bool[7];
-                for (int i = 0; i < mathToDefault.Length; i++)
+                defaultMath = new bool[7];
+                for (int i = 0; i < defaultMath.Length; i++)
                 {
-                    mathToDefault[i] = false;
+                    defaultMath[i] = true;
                 }
             }
 
-            WG_MathParam defaultParam = new WG_MathParam(1.0, 0.0);
-            if (!mathToDefault[DataStore.CONSTRUCT])
+            if (defaultMath[DataStore.CONSTRUCT])
             {
-                DataStore.calcObjects[DataStore.CONSTRUCT] = new Linear();
-                DataStore.calcObjects[DataStore.CONSTRUCT].setDefaults();
+                DataStore.calcObjects[DataStore.CONSTRUCT] = new Off();
             }
 
-            if (!mathToDefault[DataStore.MAINT])
+            if (defaultMath[DataStore.MAINT])
             {
-                DataStore.calcObjects[DataStore.MAINT] = new Linear();
-                DataStore.calcObjects[DataStore.MAINT].setDefaults();
+                DataStore.calcObjects[DataStore.MAINT] = new Off();
             }
 
-            if (!mathToDefault[DataStore.RELOC])
+            if (defaultMath[DataStore.RELOC])
             {
-                DataStore.calcObjects[DataStore.RELOC] = new Percentage();
-                //new WG_MathParam(20.0, 0.0)
-            }
-            // FIXME TODO
-
-            if (!mathToDefault[DataStore.REFUND])
-            {
-                DataStore.calcObjects[DataStore.REFUND] = new Percentage();
-                //new WG_MathParam(75.0, 0.0)
+                DataStore.calcObjects[DataStore.RELOC] = new Percentage(20.0);
             }
 
-            if (!mathToDefault[DataStore.DEMAND_RES])
+            if (defaultMath[DataStore.REFUND])
             {
-                DataStore.calcObjects[DataStore.DEMAND_RES] = new Linear();
-                DataStore.calcObjects[DataStore.DEMAND_RES].setDefaults();
+                DataStore.calcObjects[DataStore.REFUND] = new Percentage(75.0);
             }
 
-            if (!mathToDefault[DataStore.DEMAND_COM])
+            if (defaultMath[DataStore.DEMAND_RES])
             {
-                DataStore.calcObjects[DataStore.DEMAND_COM] = new Linear();
-                DataStore.calcObjects[DataStore.DEMAND_COM].setDefaults();
+                DataStore.calcObjects[DataStore.DEMAND_RES] = new Off();
             }
 
-            if (!mathToDefault[DataStore.DEMAND_IND])
+            if (defaultMath[DataStore.DEMAND_COM])
             {
-                DataStore.calcObjects[DataStore.DEMAND_IND] = new Linear();
-                DataStore.calcObjects[DataStore.DEMAND_IND].setDefaults();
+                DataStore.calcObjects[DataStore.DEMAND_COM] = new Off();
+            }
+
+            if (defaultMath[DataStore.DEMAND_IND])
+            {
+                DataStore.calcObjects[DataStore.DEMAND_IND] = new Off();
             }
         }
     }

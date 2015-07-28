@@ -11,12 +11,11 @@ namespace WG_ConfigDifficulty
         public static string NAME = "sigmoid";
         double a;
         double b;
-        Dictionary<int, int> sigMap = new Dictionary<int,int>(100);
+        Dictionary<int, int> sigMap = new Dictionary<int,int>(150);
 
 
         public Sigmoid()
         {
-            calculateArray();
         }
 
 
@@ -24,12 +23,14 @@ namespace WG_ConfigDifficulty
         {
             a = 1.0;
             b = 0.0;
+            calculateArray();
         }
 
         public override void readXML(XmlNode node)
         {
             a = XMLHelper.takeParam(node, "a", 1.0);
-            a = XMLHelper.takeParam(node, "b", 0.0);
+            b = XMLHelper.takeParam(node, "b", 0.0);
+            calculateArray();
         }
 
         public override XmlNode generateXML(XmlDocument xmlDoc, string elementName)

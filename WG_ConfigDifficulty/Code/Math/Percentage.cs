@@ -10,8 +10,9 @@ namespace WG_ConfigDifficulty
         public static string NAME = "percentage";
         double a;
 
-        public Percentage()
+        public Percentage(double a)
         {
+            this.a = a / 100.0;
         }
 
         public override void setDefaults()
