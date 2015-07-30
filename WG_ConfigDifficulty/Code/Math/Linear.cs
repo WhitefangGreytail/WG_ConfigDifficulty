@@ -13,6 +13,8 @@ namespace WG_ConfigDifficulty
 
         public Linear()
         {
+            a = 1.0;
+            b = 0.0;
         }
 
         public override void setDefaults()
@@ -24,7 +26,7 @@ namespace WG_ConfigDifficulty
         public override void readXML(XmlNode node)
         {
             a = XMLHelper.takeParam(node, "a", 1.0);
-            a = XMLHelper.takeParam(node, "b", 0.0);
+            b = XMLHelper.takeParam(node, "b", 0.0);
         }
 
         public override XmlNode generateXML(XmlDocument xmlDoc, string elementName)

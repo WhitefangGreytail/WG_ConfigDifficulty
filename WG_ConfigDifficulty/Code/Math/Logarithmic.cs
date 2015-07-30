@@ -20,13 +20,13 @@ namespace WG_ConfigDifficulty
         public override void setDefaults()
         {
             a = 1.0;
-            b = 0.0;
+            b = 10.0;
         }
 
         public override void readXML(XmlNode node)
         {
             a = XMLHelper.takeParam(node, "a", 1.0);
-            a = XMLHelper.takeParam(node, "b", 0.0);
+            b = XMLHelper.takeParam(node, "b", 10.0);
         }
 
         public override XmlNode generateXML(XmlDocument xmlDoc, string elementName)
@@ -69,7 +69,7 @@ namespace WG_ConfigDifficulty
 
         private int addToMap(int input)
         {
-            int output = (int) ((input * a * Math.Log10(input)) + b);
+            int output = (int) (input * a * Math.Log(input, b));
             logMap.Add(input, output);
             return output;
         }
