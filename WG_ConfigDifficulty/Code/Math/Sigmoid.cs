@@ -9,8 +9,10 @@ namespace WG_ConfigDifficulty
     class Sigmoid : WGCD_Math
     {
         public static string NAME = "sigmoid";
-        double a;
-        double b;
+        double a; // steepness
+        double offset;
+        double midPoint = 50.0;
+        
         Dictionary<int, int> sigMap = new Dictionary<int,int>(150);
 
 
@@ -18,18 +20,19 @@ namespace WG_ConfigDifficulty
         {
         }
 
-
         public override void setDefaults()
         {
             a = 1.0;
-            b = 0.0;
+            offset = 1.0; // Goes from 0 to 99, offset by 1 to have residual demand.
+            midPoint = 50.0;
             calculateArray();
         }
 
         public override void readXML(XmlNode node)
         {
             a = XMLHelper.takeParam(node, "a", 1.0);
-            b = XMLHelper.takeParam(node, "b", 0.0);
+            offset = XMLHelper.takeParam(node, "offset", 1.0);
+            midPoint = XMLHelper.takeParam(node, "mid", 0.0);
             calculateArray();
         }
 
@@ -45,21 +48,16 @@ namespace WG_ConfigDifficulty
             attribute.Value = Convert.ToString(a);
             node.Attributes.Append(attribute);
 
-            attribute = xmlDoc.CreateAttribute("b");
-            attribute.Value = Convert.ToString(b);
+            attribute = xmlDoc.CreateAttribute("offset");
+            attribute.Value = Convert.ToString(offset);
+            node.Attributes.Append(attribute);
+
+            attribute = xmlDoc.CreateAttribute("mid");
+            attribute.Value = Convert.ToString(midPoint);
             node.Attributes.Append(attribute);
 
             return node;
         }
-
-
-
-        public override double calculateReturnValue(double input)
-        {
-            // Returns 0 to 100
-            return (100 / (1 + Math.Exp(a * -0.1 * (input - 50)))) + b;
-        }
-
 
         public override int calculateReturnValue(int input)
         {
@@ -85,7 +83,7 @@ namespace WG_ConfigDifficulty
 
         private int addToMap(int input)
         {
-            int output = (int) ((100 / (1 + Math.Exp(a * -0.1 * (input - 50)))) + b);
+            int output = (int)((100 / (1 + Math.Exp(a * -0.1 * (input - midPoint)))) + offset);
             sigMap.Add(input, output);
             return output;
         }

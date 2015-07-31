@@ -16,8 +16,6 @@ namespace WG_ConfigDifficulty
 
         public abstract XmlNode generateXML(XmlDocument xmlDoc, string elementName);
 
-        public abstract double calculateReturnValue(double input);
-
         public abstract int calculateReturnValue(int input);
     }
 }

@@ -125,7 +125,7 @@ namespace WG_ConfigDifficulty
                             mathIndex = -1;
                         }
                     }
-                    // No else case because the switch already detected it for us
+                    // No else case because the switch should have detected it for us
 
                     if (mathIndex >= 0)
                     {
@@ -135,7 +135,7 @@ namespace WG_ConfigDifficulty
                 }
                 catch
                 {
-                    // defaultMath
+                    // defaultMath is already true
                 }
             } // end for
         }
@@ -190,11 +190,11 @@ namespace WG_ConfigDifficulty
         public void writeXML(string fileLocation)
         {
             XmlDocument xmlDoc = new XmlDocument();
-            XmlComment comment = xmlDoc.CreateComment("Math type templates (copy paste as required)\n" +
-                                                      "type=\"linear\" a=\"1\" b=\"0\"\n" +
-                                                      "type=\"logarithmic\" a=\"1\" b=\"10\"\n" +
-                                                      "type=\"percentage\" a=\"20\"\n" +
-                                                      "type=\"sigmoid\" a=\"1\" b=\"0\"\n" +
+            XmlComment comment = xmlDoc.CreateComment("Math type templates (copy paste and edit as required)\n" +
+                                                      "type=\"linear\" a=\"1.0\" b=\"0.0\"\n" +
+                                                      "type=\"logarithmic\" multiplier=\"1.0\" base=\"400.0\"\n" +
+                                                      "type=\"percentage\" a=\"20.0\"\n" +
+                                                      "type=\"sigmoid\" a=\"1.0\" offset=\"1.0\" mid=\"50.0\"\n" +
                                                       "type=\"off\"\n");
             xmlDoc.AppendChild(comment);
 

@@ -8,7 +8,7 @@ using System.Xml;
 using ICities;
 using UnityEngine;
 using ColossalFramework.Plugins;
-
+using System.Diagnostics;
 
 namespace WG_ConfigDifficulty
 {
@@ -16,6 +16,8 @@ namespace WG_ConfigDifficulty
     {
         public const String XML_FILE = "WG_ConfigDifficulty.xml";
         public String currentFileLocation = ColossalFramework.IO.DataLocation.localApplicationData + Path.DirectorySeparatorChar + XML_FILE;
+        bool hasLoaded = false;
+        Stopwatch sw = new Stopwatch();
 
         public override void OnLevelUnloading()
         {
@@ -33,15 +35,20 @@ namespace WG_ConfigDifficulty
         public override void OnCreated(ILoading loading)
         {
             // To overwrite the game defaults which EconomyExtensionBase is used before OnLevelLoaded is called
+            sw = Stopwatch.StartNew();
             readFromXML();
-            Debugging.panelMessage("Loaded!");
+            sw.Stop();
+            hasLoaded = true;
         }
 
         public override void OnLevelLoaded(LoadMode mode)
         {
-            if (mode == LoadMode.LoadGame || mode == LoadMode.NewGame)
-            {
-//                readFromXML();
+            // Do nothing because loading from the main menu or from a different city is required
+            if (hasLoaded)
+            { 
+                // To print notification, because I don't think OnCreated has access to a panel yet
+                Debugging.panelMessage("Loaded in " + sw.ElapsedMilliseconds + " ms.");
+                hasLoaded = false;
             }
         }
 
@@ -80,7 +87,7 @@ namespace WG_ConfigDifficulty
         }
 
         /// <summary>
-        /// Sets the defaults to what the game currently have. We'll have other XML defaults
+        /// Sets the defaults to what the game currently have to have a starting point
         /// </summary>
         /// <param name="defaultMath"></param>
         private void doMathDefaults(bool[] defaultMath)
@@ -116,17 +123,20 @@ namespace WG_ConfigDifficulty
 
             if (defaultMath[DataStore.DEMAND_RES])
             {
-                DataStore.calcObjects[DataStore.DEMAND_RES] = new Off();
+                DataStore.calcObjects[DataStore.DEMAND_RES] = new Sigmoid();
+                DataStore.calcObjects[DataStore.DEMAND_RES].setDefaults();
             }
 
             if (defaultMath[DataStore.DEMAND_COM])
             {
-                DataStore.calcObjects[DataStore.DEMAND_COM] = new Off();
+                DataStore.calcObjects[DataStore.DEMAND_COM] = new Sigmoid();
+                DataStore.calcObjects[DataStore.DEMAND_COM].setDefaults();
             }
 
             if (defaultMath[DataStore.DEMAND_IND])
             {
-                DataStore.calcObjects[DataStore.DEMAND_IND] = new Off();
+                DataStore.calcObjects[DataStore.DEMAND_IND] = new Sigmoid();
+                DataStore.calcObjects[DataStore.DEMAND_IND].setDefaults();
             }
         }
     }

@@ -20,13 +20,13 @@ namespace WG_ConfigDifficulty
         public override void setDefaults()
         {
             a = 1.0;
-            b = 10.0;
+            b = 400.0; // Base of 300 so costs don't explode. Using a base of 100, I can just scrape by.
         }
 
         public override void readXML(XmlNode node)
         {
-            a = XMLHelper.takeParam(node, "a", 1.0);
-            b = XMLHelper.takeParam(node, "b", 10.0);
+            a = XMLHelper.takeParam(node, "multiplier", 1.0);
+            b = Math.Abs(XMLHelper.takeParam(node, "base", 400.0));  // Take absolute because a base that is negative is not defined
         }
 
         public override XmlNode generateXML(XmlDocument xmlDoc, string elementName)
@@ -37,32 +37,28 @@ namespace WG_ConfigDifficulty
             attribute.Value = Convert.ToString(NAME);
             node.Attributes.Append(attribute);
 
-            attribute = xmlDoc.CreateAttribute("a");
+            attribute = xmlDoc.CreateAttribute("multiplier");
             attribute.Value = Convert.ToString(a);
             node.Attributes.Append(attribute);
 
-            attribute = xmlDoc.CreateAttribute("b");
+            attribute = xmlDoc.CreateAttribute("base");
             attribute.Value = Convert.ToString(b);
             node.Attributes.Append(attribute);
 
             return node;
         }
 
-        public override double calculateReturnValue(double input)
-        {
-            // Take the log of the input, then scale by a, add b
-            return (input * a * Math.Log(input, b));
-        }
-
         public override int calculateReturnValue(int input)
         {
             int output = 0;
 
-            if (!logMap.TryGetValue(input, out output))
+            if (input >= 0) // Stop imaginary numbers
             {
-                output = addToMap(input);
+                if (!logMap.TryGetValue(input, out output))
+                {
+                    output = addToMap(input);
+                }
             }
-
             return output;
         }
 
