@@ -31,11 +31,6 @@ namespace WG_ConfigDifficulty
             return node;
         }
 
-        public override double calculateReturnValue(double input)
-        {
-            return input;
-        }
-
         public override int calculateReturnValue(int input)
         {
             return input;

@@ -17,7 +17,7 @@ namespace WG_ConfigDifficulty
 
         public override void setDefaults()
         {
-            a = 100.0;
+            a = 1.0;
         }
 
         public override void readXML(XmlNode node)
@@ -33,17 +33,11 @@ namespace WG_ConfigDifficulty
             attribute.Value = Convert.ToString(NAME);
             node.Attributes.Append(attribute);
 
-            // TODO - Format to 5 decimal places
             attribute = xmlDoc.CreateAttribute("a");
             attribute.Value = Convert.ToString(a * 100.0);
             node.Attributes.Append(attribute);
 
             return node;
-        }
-
-        public override double calculateReturnValue(double input)
-        {
-            return (a * input);
         }
 
         public override int calculateReturnValue(int input)
