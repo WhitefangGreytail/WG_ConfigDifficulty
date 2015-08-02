@@ -3,6 +3,8 @@
 *.suo
 *.sln
 *.xls*
+*.jpg*
+*.png*
 *Help file.txt
 WG_ConfigDifficulty/bin/*
 WG_ConfigDifficulty/obj/*

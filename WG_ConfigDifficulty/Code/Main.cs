@@ -28,7 +28,7 @@ namespace WG_ConfigDifficulty
             }
             catch (Exception e)
             {
-                Debugging.panelMessage(e.Message);
+                Debugging.panelWarning(e.Message);
             }
         }
 
@@ -103,22 +103,24 @@ namespace WG_ConfigDifficulty
 
             if (defaultMath[DataStore.CONSTRUCT])
             {
-                DataStore.calcObjects[DataStore.CONSTRUCT] = new Off();
+                DataStore.calcObjects[DataStore.CONSTRUCT] = new Linear();
+                DataStore.calcObjects[DataStore.CONSTRUCT].setDefaults();
             }
 
             if (defaultMath[DataStore.MAINT])
             {
-                DataStore.calcObjects[DataStore.MAINT] = new Off();
+                DataStore.calcObjects[DataStore.MAINT] = new Linear();
+                DataStore.calcObjects[DataStore.MAINT].setDefaults();
             }
 
             if (defaultMath[DataStore.RELOC])
             {
-                DataStore.calcObjects[DataStore.RELOC] = new Percentage(20.0);
+                DataStore.calcObjects[DataStore.RELOC] = new Percentage(50.0);
             }
 
             if (defaultMath[DataStore.REFUND])
             {
-                DataStore.calcObjects[DataStore.REFUND] = new Percentage(75.0);
+                DataStore.calcObjects[DataStore.REFUND] = new Percentage(50.0);
             }
 
             if (defaultMath[DataStore.DEMAND_RES])

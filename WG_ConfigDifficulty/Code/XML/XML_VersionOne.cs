@@ -188,7 +188,7 @@ namespace WG_ConfigDifficulty
             XmlDocument xmlDoc = new XmlDocument();
             XmlComment comment = xmlDoc.CreateComment("Math type templates (copy paste and edit as required)\n" +
                                                       "type=\"linear\" a=\"1.0\" b=\"0.0\"\n" +
-                                                      "type=\"logarithmic\" multiplier=\"1.0\" base=\"400.0\"\n" +
+                                                      "type=\"logarithmic\" multiplier=\"1.0\" base=\"300.0\"\n" +
                                                       "type=\"percentage\" a=\"20.0\"\n" +
                                                       "type=\"sigmoid\" a=\"1.0\" offset=\"1.0\" mid=\"50.0\"\n" +
                                                       "type=\"off\"\n");

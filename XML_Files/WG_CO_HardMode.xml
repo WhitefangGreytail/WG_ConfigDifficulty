@@ -1,6 +1,6 @@
 <!--Math type templates (copy paste and edit as required)
 type="linear" a="1.0" b="0.0"
-type="logarithmic" multiplier="1.0" base="400.0"
+type="logarithmic" multiplier="1.0" base="300.0"
 type="percentage" a="20.0"
 type="sigmoid" a="1.0" offset="1.0" mid="50.0"
 type="off"
