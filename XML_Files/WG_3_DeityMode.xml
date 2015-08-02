@@ -8,13 +8,13 @@ type="off"
 <WG_ConfigDifficulty version="1">
   <economy>
     <construct type="logarithmic" multiplier="1" base="200" />
-    <maint type="off" />
-    <relocation type="percentage" a="66.66" />
+    <maint type="linear" a="2.0" b="0.0" />
+    <relocation type="percentage" a="75" />
     <refund type="percentage" a="25" />
   </economy>
   <demand>
-    <demand_res type="sigmoid" a="1" offset="1" mid="55" />
-    <demand_com type="sigmoid" a="1" offset="1" mid="55" />
-    <demand_ind type="sigmoid" a="1" offset="1" mid="55" />
+    <demand_res type="sigmoid" a="1" offset="1" mid="60" />
+    <demand_com type="sigmoid" a="1" offset="1" mid="60" />
+    <demand_ind type="sigmoid" a="1" offset="1" mid="60" />
   </demand>
 </WG_ConfigDifficulty>

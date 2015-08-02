@@ -97,13 +97,9 @@ namespace WG_ConfigDifficulty
                             return;
                     }
 
-                    if (math is Off)
+                    if (mathIndex == DataStore.RELOC || mathIndex == DataStore.REFUND)
                     {
-                        // Do nothing, this is universally accepted
-                    }
-                    else if (mathIndex == DataStore.RELOC || mathIndex == DataStore.REFUND)
-                    {
-                        // Allow percentage, based off the construction cost
+                        // Allow percentage, based off the construction cost. Do not allow to be turned off
                         if (!(math is Percentage))
                         {
                             mathIndex = -1;
@@ -112,7 +108,7 @@ namespace WG_ConfigDifficulty
                     else if (mathIndex == DataStore.CONSTRUCT || mathIndex == DataStore.MAINT)
                     {
                         // Allow linear, log, 
-                        if (!(math is Linear || math is Logarithmic))
+                        if (!(math is Linear || math is Logarithmic || math is Off))
                         {
                             mathIndex = -1;
                         }
@@ -120,7 +116,7 @@ namespace WG_ConfigDifficulty
                     else if  (mathIndex == DataStore.DEMAND_RES || mathIndex == DataStore.DEMAND_COM || mathIndex == DataStore.DEMAND_IND)
                     {
                         // Allow linear, sigmoid
-                        if (!(math is Linear || math is Sigmoid))
+                        if (!(math is Linear || math is Sigmoid || math is Off))
                         {
                             mathIndex = -1;
                         }

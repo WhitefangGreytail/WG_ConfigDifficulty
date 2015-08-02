@@ -7,14 +7,14 @@ type="off"
 -->
 <WG_ConfigDifficulty version="1">
   <economy>
-    <construct type="logarithmic" multiplier="1" base="400" />
-    <maint type="off" />
-    <relocation type="percentage" a="30" />
+    <construct type="linear" a="1.2" b="0.0" />
+    <construct type="linear" a="1.2" b="0.0" />
+    <relocation type="percentage" a="50" />
     <refund type="percentage" a="50" />
   </economy>
   <demand>
-    <demand_res type="sigmoid" a="1" offset="1" mid="50" />
-    <demand_com type="sigmoid" a="1" offset="1" mid="50" />
-    <demand_ind type="sigmoid" a="1" offset="1" mid="50" />
+    <demand_res type="linear" a="1.0" b="-20.0" />
+    <demand_com type="linear" a="1.0" b="-20.0" />
+    <demand_ind type="linear" a="1.0" b="-20.0" />
   </demand>
 </WG_ConfigDifficulty>

@@ -13,7 +13,7 @@ namespace WG_ConfigDifficulty
 
         public string Description
         {
-            get { return "Allows configuration of the game's in built 'Hard Mode'. Such as how buildings level up, maintenance costs"; }
+            get { return "Allows configuration of the game's economy, demand levels."; }
         }
     }
 }
