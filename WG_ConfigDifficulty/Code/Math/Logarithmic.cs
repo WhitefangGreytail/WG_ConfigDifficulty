@@ -20,13 +20,13 @@ namespace WG_ConfigDifficulty
         public override void setDefaults()
         {
             a = 1.0;
-            b = 400.0; // Base of 300 so costs don't explode. Using a base of 100, I can just scrape by.
+            b = 300.0; // Base of 300 so costs don't explode. Using a base of 100, I can just scrape by.
         }
 
         public override void readXML(XmlNode node)
         {
             a = XMLHelper.takeParam(node, "multiplier", 1.0);
-            b = Math.Abs(XMLHelper.takeParam(node, "base", 400.0));  // Take absolute because a base that is negative is not defined
+            b = Math.Abs(XMLHelper.takeParam(node, "base", 300.0));  // Take absolute because a base that is negative is not defined
         }
 
         public override XmlNode generateXML(XmlDocument xmlDoc, string elementName)

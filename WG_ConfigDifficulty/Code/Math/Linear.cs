@@ -13,19 +13,19 @@ namespace WG_ConfigDifficulty
 
         public Linear()
         {
-            a = 1.0;
+            a = 1.2;
             b = 0.0;
         }
 
         public override void setDefaults()
         {
-            a = 1.0;
+            a = 1.2;
             b = 0.0;
         }
 
         public override void readXML(XmlNode node)
         {
-            a = XMLHelper.takeParam(node, "a", 1.0);
+            a = XMLHelper.takeParam(node, "a", 1.2);
             b = XMLHelper.takeParam(node, "b", 0.0);
         }
 
